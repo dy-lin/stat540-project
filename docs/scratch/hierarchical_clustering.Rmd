@@ -1,0 +1,169 @@
+---
+title: "hierarchical_clustering"
+author: "Almas K."
+date: '2020-03-10'
+output: github_document
+---
+
+## Libraries
+
+```{r}
+library(tidyverse)
+library(reshape2)
+library(stringr)
+library(here)
+library(tictoc)
+library(ggdendro)
+library(dendextend)
+library(lumi)
+```
+
+
+## Load Data
+
+```{r}
+raw_dat <- readRDS(here("data", "raw_data", "data.rds"))
+filtered_metadata <- readRDS(here("data","processed_data","metadata.rds"))
+```
+
+
+## Filter Loaded Data:
+
+```{r}
+male_metadata <- filtered_metadata %>%
+  filter(sex=="Male")
+rownames(male_metadata) <- male_metadata$sample
+data_to_clust <- raw_dat
+rownames(data_to_clust) <- data_to_clust$CG
+data_to_clust <- data_to_clust %>%
+  dplyr::select_if((names(.) %in% male_metadata$sample)) %>%
+  drop_na() 
+
+filt_data <- raw_dat %>%
+   dplyr::select_if((names(.) %in% male_metadata$sample)|names(.)=="CG") %>%
+  drop_na() 
+
+male_metadata %>%
+  group_by(cancer) %>%
+  tally()
+```
+
+
+```{r}
+data_mval <- beta2m(data_to_clust)
+```
+
+
+
+
+## Hierarchical Clustering and Heatmap
+
+```{r}
+
+#distance
+D <- dist(t(data_to_clust)) 
+# t flips the x and y dimensions, b/c the dist measure uses rows, and we want to look at column similarity we transpose,
+
+# clustering
+clust <- hclust(D,method="average")
+dendo <- as.dendrogram(clust) 
+
+
+dendo %>%
+  hang.dendrogram() %>%
+plot(horiz=F, main="Dendogram of Males Clustered Usin Euclidean and Average Linkage")
+
+
+```
+ 
+```{r}
+heatmap <- pheatmap::pheatmap(as.matrix(D))
+heatmap
+```
+ 
+```{r}
+## We can change the colours of the covariates
+png( width = 1000, height = 800,here("results","final","heatmap_with_clusters.png") )
+var1 = c("orange1", "darkred","purple","yellow")
+names(var1) = levels(male_metadata$cancer)
+var2 = c("grey", "black")
+names(var2)= levels(male_metadata$cancer_type)
+var3 = c("pink1", "pink3", "lightblue1", "blue3")
+names(var3)=levels(male_metadata$smoking_status)
+covar_color = list(cancer = var1, cancer_type = var2, smoking_status = var3)
+
+clust_scale = "none"  
+covar_color = list(cancer = var1, cancer_type= var2, smoking_status= var3)
+heatmap <- pheatmap::pheatmap(as.matrix(D),cluster_rows = TRUE, scale = clust_scale, 
+    clustering_method = "average", clustering_distance_cols = "euclidean", 
+    show_rownames = FALSE, main = "Clustering heatmap ", annotation = male_metadata[, 
+        c("cancer", "cancer_type", "smoking_status")], annotation_colors = covar_color)
+heatmap
+dev.off()
+```
+
+Using M-values
+```{r}
+#distance
+D_mval <- dist(t(data_mval)) 
+# t flips the x and y dimensions, b/c the dist measure uses rows, and we want to look at column similarity we transpose
+heatmap2 <- pheatmap::pheatmap(as.matrix(D_mval),cluster_rows = TRUE, scale = clust_scale, 
+    clustering_method = "average", clustering_distance_cols = "euclidean", 
+    show_rownames = FALSE, main = "Clustering heatmap using Mvalues ", annotation = male_metadata[, 
+        c("cancer", "cancer_type", "smoking_status")], annotation_colors = covar_color)
+heatmap2
+
+```
+
+```{r}
+cluster_samples <- cutree(heatmap$tree_col, k = 10)
+# cluster_genes = cutree(my_heatmap_obj$tree_row, k=100)
+knitr::kable(cluster_samples)
+```
+
+```{r fig.width=10, fig.height=10}
+
+plot(clust, labels = male_metadata$sample, cex = 0.6, main = "Average Linkage showing 10 clusters")
+rect.hclust(clust, k = 10)
+
+plot(clust, labels = male_metadata$origin, cex = 0.6, main = "Average Linkage showing 10 clusters")
+rect.hclust(clust, k = 10)
+
+plot(clust, labels = male_metadata$cancer, cex = 0.6, main = "Average Linkage showing 10 clusters")
+rect.hclust(clust, k = 10)
+
+plot(clust, labels = male_metadata$cancer_type, cex = 0.6, main = "Average Linkage showing 10 clusters")
+rect.hclust(clust, k = 10)
+
+plot(clust, labels = male_metadata$smoking_status, cex = 0.6, main = "Average Linkage showing 10 clusters")
+rect.hclust(clust, k = 10)
+
+```
+
+```{r}
+Active_smoking <-male_metadata %>% filter(as.character(smoking_status) =="Active ") %>% pull(sample) # Space in active smoker category
+smoking_col_dendo <- dendo %>%
+  set("labels_cex", 0.6) %>%
+    color_labels(labels = Active_smoking,col="#B84EFF") %>% 
+  hang.dendrogram %>% 
+  plot(horiz = F,main="Active smoking in Hierarchical Clustered Samples")
+
+cancer_met <- male_metadata %>% filter(cancer_type=="metastatic") %>%
+  pull(sample)
+  
+cancer_col_dendo <- dendo %>%
+  set("labels_cex", 0.6) %>%
+    color_labels(labels = cancer_met,col="red") %>% 
+  hang.dendrogram %>% 
+  plot(horiz = F,main="Metastatic cancer in Hierarchical Clustered Samples")
+```
+
+```{r,eval=FALSE}
+write_csv(male_metadata,here("data","raw_data","male_metadata.csv"))
+```
+
+```{r, eval=FALSE}
+saveRDS(data_to_clust,here("data","raw_data","data_for_limma.rds"))
+```
+
+

@@ -1,0 +1,32 @@
+---
+title: "Linear_regression_results"
+author: "Almas K."
+date: '2020-04-02'
+output: github_document
+---
+
+This Rmd is just to view the results for the limma outputs:
+
+##Libraries
+```{r}
+library(tidyverse)
+library(here)
+```
+
+## Viewing Results:
+
+```{r}
+primary_cancer <- read_csv(here("results","final","primary_topGenes_limma2.csv"))
+knitr::kable(primary_cancer)
+```
+
+```{r}
+age_factor <- read_csv(here("results","revised","age_top_genes_limma2.csv"))
+knitr::kable(age_factor)
+```
+
+```{r}
+age_primary_cancer_interaction <- read_csv(here("results","revised","ageandprimary_top_genes_limma2.csv"))
+knitr::kable(age_primary_cancer_interaction)
+```
+

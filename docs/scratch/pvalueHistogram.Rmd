@@ -1,0 +1,333 @@
+---
+title: "P_value"
+author: "Nayrouz"
+date: "3/12/2020"
+output: github_document
+---
+
+---
+title: "Data Fetching"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE, warning = FALSE)
+```
+
+Load necessary packages:
+
+```{r load, warning=FALSE, message=FALSE}
+library(GEOquery)
+library(tidyverse)
+library(reshape2)
+library(stringr)
+library(here)
+library(tictoc)
+```
+
+Get the GEO dataset: `GSE124052`
+
+```{r getGEO}
+if (!exists("gds")) {
+    if (!file.exists(here("data", "raw_data", "gds.rds"))) {
+        gds <- getGEO("GSE124052")[[1]]
+        saveRDS(gds, file = here("data", "raw_data", "gds.rds"))
+    } else {
+        gds <- readRDS(file = here("data", "raw_data", "gds.rds"))
+    }
+}
+```
+
+Get appropriate data from the `gds` object:
+```{r get metadata}
+metadata_master <- pData(gds) %>%
+    rownames_to_column(var = "sample")
+
+if (!file.exists(here("data", "raw_data", "metadata.csv"))) {
+    write_csv(
+        data.frame(metadata_master),
+        here("data", "raw_data", "metadata.csv"),
+        col_names = TRUE
+    )
+    saveRDS(data.frame(metadata_master), file = here("data", "raw_data", "metadata.rds"))
+}
+
+metadata_filtered <- metadata_master %>%
+    select(
+        sample,
+        source = source_name_ch1,
+        cancer = title,
+        sex = `gender:ch1`,
+        age = `age:ch1`,
+        smoking = `smoking status (pack years):ch1`,
+        hpv = `hpv genotyping:ch1`,
+        p16 = `p16 immunohistochemistry:ch1`,
+        dna = `dna input [ng]:ch1`,
+        tumour = `tumor cell content (%):ch1`,
+        origin = `hnsc site of origin:ch1`
+    ) %>%
+    mutate(cancer_type = case_when(
+        str_detect(cancer, "metastasis") ~ "metastatic",
+        TRUE ~ "primary"
+    ))
+
+# Make the cells neater
+metadata_filtered$cancer <-
+    str_remove(metadata_filtered$cancer, ".+: ") %>%
+    str_remove(" ..$") %>%
+    as.factor()
+metadata_filtered$cancer_type <- as.factor(metadata_filtered$cancer_type)
+metadata_filtered$tumour <- metadata_filtered$tumour %>%
+    str_remove(fixed("%")) %>%
+    as.double()
+
+metadata_filtered <- metadata_filtered %>%
+    separate(smoking,
+             into = c("smoking_status", "packs_per_year"),
+             sep = "\\(")
+
+metadata_filtered$smoking_status <-
+    str_remove(metadata_filtered$smoking_status, "smoker") %>%
+    str_remove("  100 py") %>% 
+    str_replace("Former\\s*","Former") %>%
+    as.factor()
+
+metadata_filtered$packs_per_year <-
+    str_remove(metadata_filtered$packs_per_year, fixed("py)")) %>%
+    str_remove(fixed(")")) %>% 
+    as.double()
+
+metadata_filtered$source <-
+    str_replace(metadata_filtered$source, "Biospy", "Biopsy") %>%
+    as.factor()
+
+metadata_filtered$hpv <- str_replace(metadata_filtered$source, "Negativ", "Negative") %>%
+    as.factor()
+metadata_filtered$sex <- as.factor(metadata_filtered$sex)
+metadata_filtered$age <- as.double(metadata_filtered$age)
+metadata_filtered$hpv <- as.factor(metadata_filtered$hpv)
+metadata_filtered$p16 <- as.factor(metadata_filtered$p16)
+metadata_filtered$dna <- as.double(metadata_filtered$dna)
+metadata_filtered[metadata_filtered == "Not applicable"] <- NA
+metadata_filtered$origin <- str_replace(metadata_filtered$origin, "Tounge", "Tongue") %>%
+    as.factor()
+
+metadata_filtered <-
+    rename(metadata_filtered,
+           dna_ng = dna,
+           tumour_percent = tumour)
+metadata_filtered$sample <- as.factor(metadata_filtered$sample)
+
+if (!file.exists(here("data", "processed_data", "metadata.csv"))) {
+    write_csv(
+        data.frame(metadata_filtered),
+        here("data", "processed_data", "metadata.csv"),
+        col_names = TRUE
+    )
+    saveRDS(data.frame(metadata_filtered), file = here("data", "processed_data", "metadata.rds"))
+}
+```
+
+Get the actual methylation data:
+```{r data}
+raw_data <- exprs(gds)
+raw_data <- rownames_to_column(data.frame(raw_data), "CG")
+if (!file.exists(here("data", "raw_data", "data.csv"))) {
+    write_csv(raw_data, here("data", "raw_data", "data.csv"), col_names = TRUE)
+    saveRDS(raw_data, file = here("data", "raw_data", "data.rds"))
+}
+shaped_data <- melt(raw_data, id.vars = c("CG"), var = "sample")
+
+if (!file.exists(here("data", "processed_data", "data.csv"))) {
+    write_csv(shaped_data,
+              here("data", "processed_data", "data.csv"),
+              col_names = TRUE)
+    saveRDS(shaped_data, file = here("data", "processed_data", "data.rds"))
+}
+```
+
+```{r join, cache.lazy=FALSE}
+data <- left_join(metadata_filtered, shaped_data, by = "sample")
+if (!file.exists(here("data", "processed_data", "combined_data.csv"))) {
+    tic() 
+    write_csv(data,
+              here("data", "processed_data", "combined_data.csv"),
+              col_names = TRUE)
+    toc() # 2320.143 sec elapsed
+    tic()
+    saveRDS(data, file = here("data", "processed_data", "combined_data.rds"))
+    toc() # 560.374 sec elapsed
+}
+```
+
+
+Get the relevant, smaller subset joined dataframe: 
+```{r subset, cache.lazy=FALSE}
+data_subset <- data %>%
+        filter(sex == "Male") %>%
+        select(c("sample", "source", "cancer", "age", "origin", "cancer_type", "CG", "value"))
+if (!file.exists(here("data", "processed_data", "filtered_data.csv"))) {
+    tic()
+    write_csv(data_subset,
+              here("data", "processed_data", "filtered_data.csv"),
+              col_names = TRUE)
+    toc() # 1090.4 sec elapsed
+    tic()
+    saveRDS(data_subset, file = here("data", "processed_data", "filtered_data.rds"))
+    toc() # 397.922 sec elapsed
+} 
+```
+
+
+Subset of data:
+```{r summarize}
+summary(data_subset)
+```
+
+
+```{r platform, eval = FALSE, echo = FALSE}
+# code from https://www.ncbi.nlm.nih.gov/geo/geo2r/?acc=GSE124052
+gset <- getGEO("GSE124052", GSEMatrix = TRUE, getGPL = FALSE)
+if (length(gset) > 1)
+    idx <- grep("GPL23976", attr(gset, "names"))
+else
+    idx <- 1
+gset <- gset[[idx]]
+```
+
+```{r plot, eval = FALSE, echo = FALSE}
+dev.new(width = 4 + dim(gset)[[2]] / 5, height = 6)
+par(mar = c(2 + round(max(
+    nchar(sampleNames(gset))
+) / 2), 4, 2, 1))
+title <-
+    paste ("GSE124052", '/', annotation(gset), " selected samples", sep =
+               '')
+boxplot(
+    exprs(gset),
+    boxwex = 0.7,
+    notch = T,
+    main = title,
+    outline = FALSE,
+    las = 2
+)
+```
+
+
+
+#p-Value 
+```{r pvalue}
+#generate a random smaller data subset 
+set.seed(4036732)
+sample_to_choose <- sample(1:length(unique( data_subset$CG )), size = 10000)
+names_to_choose <- as.character(unique(data_subset$CG)[sample_to_choose])
+
+#lets call this a small data that only has 10,000 CG probes 
+small_Data <- data_subset %>% 
+    filter( CG %in% names_to_choose) %>% group_by(CG)
+
+#clear up the data and remove the sample levels that are not included in this new small_data subset so that the model does not get confused later  
+small_Data$sample = factor(small_Data$sample)
+small_Data$sample #this should show that there are only 52 sample, levels = 52 samples 
+
+
+p <- 0.05 
+p_Values <- small_Data %>%
+  group_by(CG) %>%
+  summarize(pvalue = t.test(value ~ cancer_type)$p.value) #%>% 
+  #mutate( Truth = ifelse(pvalue<p, "Alternative", "Null"))
+
+##calculating p-value for the original bigger data_subset 
+#p_Values <- data_subset %>% 
+  #group_by(CG) %>% 
+  #summarize(pvalue = t.test(value ~ cancer_type)$p.value) 
+
+#plot p_Values
+pvalHistogram <- p_Values %>% 
+  ggplot (aes(pvalue)) + geom_histogram() +stat_bin(breaks = seq(0,1,p), binwidth = 0.05)
+
+```
+
+
+#filtering = to get rid of CG probes with >0.05 pvalue as this is an indication of poor methylation signal quality  
+```{r filtering}
+#only obtain the CG probes that are significant 
+filterData <- p_Values %>% filter(pvalue < 0.05) 
+
+#Combine filtered probes with meta data 
+filterCombine <- left_join(filterData, small_Data, by = "CG") 
+
+#combined filtered probes with orignial bigger metadata 
+#filterCombine <- left_join(filterData, data_subset, by = "CG") 
+
+```
+
+
+
+#limma 
+
+```{r limma}
+#libraries needed 
+source('http://bioconductor.org/biocLite.R')
+biocLite(illuminahumanmethylationepicmanifest)
+library(limma)
+library(pheatmap)
+library(reshape2) 
+
+#get the annotation data 
+
+#choose the filtered CGs 
+#sampleM_to_choose <- as.character(unique(filterCombine$sample))
+CGM_to_choose <- as.character(filterCombine$CG) #obtain the name of the filtered CGs
+
+#methylation Data 
+methDataS <- raw_data %>% 
+    filter( CG %in% CGM_to_choose) %>% group_by(CG) %>% as.data.frame() %>% column_to_rownames("CG")
+
+#rescale the rows 
+#sprmethDataS <- t(scale(t(methDataS))) #new= t()
+#str(sprmethDataS, max.level = 0, give.attr = FALSE)
+
+# check equivalence of sample ordering b/w metadata_filtered and methDataS
+(metadata_filtered$sample == names(methDataS)) %>% all()
+#(metadata_filtered$sample == names(sprmethDataS)) %>% all()
+
+#design matrix 
+#designMS <- model.matrix(~ cancer, metadata_filtered) 
+designMS <- model.matrix(~0 + cancer, metadata_filtered) 
+
+#fit the linear model and run ebayes to calculate moderated t-statistics
+LinFitS <- lmFit(methDataS, designMS) %>% eBayes()
+#LinFitS <- lmFit(sprmethDataS, designMS) %>% eBayes() 
+
+
+#top CpG 
+cutoff <- 0.01
+topcCG <- topTable(LinFitS, p.value = cutoff)
+
+
+#pheatmap 
+#names of top CGs 
+topCG <- rownames(topcCG)
+
+# Scaled methdata of topCG
+topDat <- methDataS[topCG, ]
+##topDat <- sprmethDataS[topCG, ] 
+
+#plot the pheatmap 
+pheatmap(topDat, cluster_rows = FALSE, scale = "none", clustering_method = "average", 
+    clustering_distance_cols = "euclidean", clustering_distance_rows = "euclidean", show_rownames = FALSE, main = "Clustering heatmap top CG") 
+
+#when I inlcude the annotion part, the pheatmap function does not work 
+#pheatmap(as.matrix(topDat), cluster_rows = FALSE, scale = "none", clustering_method = "average", 
+    #clustering_distance_cols = "euclidean", clustering_distance_rows = "euclidean", show_rownames = FALSE, main = "Clustering heatmap for top CG", annotation = metadata_filtered[,c("cancer", "cancer_type")])
+
+
+```
+
+
+
+
+
+
+

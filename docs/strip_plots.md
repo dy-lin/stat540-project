@@ -1,0 +1,120 @@
+Strip Plots
+================
+Diana Lin
+March 30, 2020
+
+### Final Results
+
+Strip plot of beta values across `cancer_type` in the top 10 genes
+(coefficient = `primary`):
+![](../results/final/stripplot_beta_cancer_type_primary.png) \#\#\#
+Scratch Results
+
+Strip plot of beta values across `cancer` in the top 10 genes
+(coefficient = `all`):
+
+![](../results/scratch/stripplot_beta_cancer.png) Strip plot of beta
+values across `cancer` in the top 10 genes (coefficient = `age`):
+
+![](../results/scratch/stripplot_beta_cancer_age.png)
+
+Strip plot of beta values across `cancer` in the top 10 genes
+(coefficient = `metastatic_hnsc`):
+
+![](../results/scratch/stripplot_beta_cancer_metastatic_hnsc.png)
+
+Strip plot of beta values across `cancer` in the top 10 genes
+(coefficient = \`primary\`\`):
+
+![](../results/scratch/stripplot_beta_cancer_primary.png) Strip plot of
+beta values across `cancer` in the top 10 genes (coefficient =
+\`primary\_lung\`\`):
+
+![](../results/scratch/stripplot_beta_cancer_primary_lung.png)
+
+Strip plot of beta values across `cancer` in the top 10 genes
+(coefficient = \`secondary\_lung\`\`):
+
+![](../results/scratch/stripplot_beta_cancer_secondary_lung.png)
+
+Strip plot of beta values across `cancer_type` in the top 10 genes
+(coefficient = `all`):
+
+![](../results/scratch/stripplot_beta_cancer_type.png) Strip plot of
+beta values across `cancer_type` in the top 10 genes (coefficient =
+`age`):
+
+![](../results/scratch/stripplot_beta_cancer_type_age.png)
+
+Strip plot of beta values across `cancer_type` in the top 10 genes
+(coefficient = `metastatic_hnsc`):
+
+![](../results/scratch/stripplot_beta_cancer_type_metastatic_hnsc.png)
+
+Strip plot of beta values across `cancer_type` in the top 10 genes
+(coefficient = `primary_lung`):
+
+![](../results/scratch/stripplot_beta_cancer_type_primary_lung.png)
+
+Strip plot of beta values across `cancer_type` in the top 10 genes
+(coefficient = `secondary_lung`):
+
+![](../results/scratch/stripplot_beta_cancer_type_secondary_lung.png)
+
+Strip plot of beta values across `cancer` in the top 10 genes
+(coefficient = `all`):
+
+![](../results/scratch/stripplot_mval_cancer.png)
+
+Strip plot of beta values across `cancer` in the top 10 genes
+(coefficient = `age`):
+
+![](../results/scratch/stripplot_mval_cancer_age.png)
+
+Strip plot of beta values across `cancer` in the top 10 genes
+(coefficient = `metastatic_hnsc`):
+
+![](../results/scratch/stripplot_mval_cancer_metastatic_hnsc.png)
+
+Strip plot of beta values across `cancer` in the top 10 genes
+(coefficient = `primary`):
+
+![](../results/scratch/stripplot_mval_cancer_primary.png) Strip plot of
+beta values across `cancer` in the top 10 genes (coefficient =
+`primary_lung`):
+
+![](../results/scratch/stripplot_mval_cancer_primary_lung.png) Strip
+plot of beta values across `cancer` in the top 10 genes (coefficient =
+`secondary_lung`):
+
+![](../results/scratch/stripplot_mval_cancer_secondary_lung.png)
+
+Strip plot of beta values across `cancer_type` in the top 10 genes
+(coefficient = `all`):
+
+![](../results/scratch/stripplot_mval_cancer_type.png)
+
+Strip plot of beta values across `cancer_type` in the top 10 genes
+(coefficient = `age`):
+
+![](../results/scratch/stripplot_mval_cancer_type_age.png)
+
+Strip plot of beta values across `cancer_type` in the top 10 genes
+(coefficient = `metastatic_hnsc`):
+
+![](../results/scratch/stripplot_mval_cancer_type_metastatic_hnsc.png)
+
+Strip plot of beta values across `cancer_type` in the top 10 genes
+(coefficient = `primary`):
+
+![](../results/scratch/stripplot_mval_cancer_type_primary.png)
+
+Strip plot of beta values across `cancer_type` in the top 10 genes
+(coefficient = `primary_lung`):
+
+![](../results/scratch/stripplot_mval_cancer_type_primary_lung.png)
+
+Strip plot of beta values across `cancer_type` in the top 10 genes
+(coefficient = `secondary_lung`):
+
+![](../results/scratch/stripplot_mval_cancer_type_secondary_lung.png)

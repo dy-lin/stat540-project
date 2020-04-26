@@ -1,0 +1,189 @@
+---
+title: "Linear Regression"
+author: "Almas K."
+date: '2020-03-28'
+output: github_document
+
+---
+## Libraries
+
+```{r}
+library(tidyverse)
+library(reshape2)
+library(stringr)
+library(here)
+library(lumi)
+library(limma)
+```
+
+
+## Import Data
+
+```{r}
+male_metadata <- read_csv(here("data","processed_data","male_metadata.csv"))
+data_limma <- readRDS(here("data","raw_data","data_for_limma.rds"))
+tsv_file <- read_tsv(here("data","raw_data","EPIC.hg38.manifest.tsv.gz"))
+data_mval <- beta2m(data_limma)
+```
+
+## Look at metadata
+```{r}
+str(male_metadata)
+male_metadata <- male_metadata %>%
+    mutate(cancer_loc= if_else(cancer == ("Pulmonary metastasis of head and neck squamous cell carcinoma"), "Metastatic HNSC",if_else( cancer== ("Primary head and neck squamous cell carcinoma"), "Primary HNSC","Primary Lung")))
+male_metadata$cancer <- as.factor(male_metadata$cancer)
+male_metadata$cancer_type <- as.factor(male_metadata$cancer_type)
+```
+## Run Limma using Cancer
+```{r}
+d_matrix <- model.matrix(~cancer*age,male_metadata)
+lm_fit <- lmFit(data_mval,d_matrix)
+eBayes1 <- eBayes(lm_fit)
+t_table <- topTable(eBayes1)
+t_table2 <- topTable(eBayes1, n=Inf)
+```
+```{r}
+t_table3 <- topTable(eBayes1,coef ="cancerPrimary lung squamous cell carcinoma",p.value=0.05)
+t_table3
+t_table4 <- topTable(eBayes1,coef = "cancerPulmonary metastasis of head and neck squamous cell carcinoma",adjust.method = "fdr",p.value=0.05)
+t_table4
+t_table5 <- topTable(eBayes1,coef ="cancerSecond squamous cell carcinoma of the lung",p.value=0.05)
+t_table5
+```
+```{r}
+genes_annotator <- function(t_tab){
+  annotated <-tsv_file %>%
+  filter(probeID %in% rownames(t_tab)) %>%
+  select(CpG_chrm,probeID,gene,gene_HGNC)
+  
+  t_table_joined <-t_tab %>%
+  mutate(probeID=rownames(t_tab)) %>%
+  left_join(.,annotated, by="probeID")
+  
+  t_table_joined
+}
+```
+
+```{r}
+topTen_annotated <-genes_annotator(t_table)
+knitr::kable(topTen_annotated)
+```
+
+```{r}
+primary_lung_annotated <-genes_annotator(t_table3)
+hnsc_annotated <- genes_annotator(t_table4)
+second_lung_annotated <- genes_annotator(t_table5)
+
+knitr::kable(primary_lung_annotated)
+knitr::kable(second_lung_annotated)
+knitr::kable(hnsc_annotated)
+```
+
+```{r}
+interest_genes <- tsv_file %>%
+  filter(gene %in% c('EBF3','TBC1D16')) %>%
+  select(CpG_chrm,probeID,gene,gene_HGNC)
+genes_int_t_table <- t_table2 %>%
+   mutate(probeID=rownames(t_table2)) %>%
+  filter(probeID %in% interest_genes$probeID) %>%
+  left_join(., interest_genes,by="probeID")
+
+knitr::kable(genes_int_t_table)
+```
+## Limma using Primary vs Metastatic cancer
+```{r}
+d_matrix2 <- model.matrix(~cancer_type*age,male_metadata)
+lm_fit2 <- lmFit(data_mval,d_matrix2)
+eBayes2 <- eBayes(lm_fit2)
+```
+
+
+
+```{r}
+v2_t_table <- topTable(eBayes2,coef = "cancer_typeprimary")
+v2_t_table <- genes_annotator(v2_t_table)
+knitr::kable(v2_t_table)
+v2_t_table2 <- topTable(eBayes2,coef = "cancer_typeprimary:age")
+v2_t_table2 <- genes_annotator(v2_t_table2)
+knitr::kable(v2_t_table2)
+v2_t_table3 <- topTable(eBayes2)
+v2_t_table3 <- genes_annotator(v2_t_table3)
+knitr::kable(v2_t_table3)
+v2_t_table4 <- topTable(eBayes2,coef = "age")
+v2_t_table4 <- genes_annotator(v2_t_table4)
+knitr::kable(v2_t_table4)
+v2_t_table5 <- topTable(eBayes2,coef = c("age","cancer_typeprimary"))
+v2_t_table5 <- genes_annotator(v2_t_table5)
+knitr::kable(v2_t_table5)
+```
+
+
+## Limma using Cancer loc :
+```{r}
+d_matrix3 <- model.matrix(~cancer_loc*age,male_metadata)
+lm_fit3 <- lmFit(data_mval,d_matrix3)
+eBayes3 <- eBayes(lm_fit3)
+```
+
+
+```{r}
+v3_t_tab1 <- topTable(eBayes3,coef="cancer_locPrimary HNSC")
+v3_t_tab2 <- topTable(eBayes3,coef="cancer_locPrimary Lung")
+v3_t_tab3 <- topTable(eBayes3,coef="cancer_locPrimary HNSC",p.value = 0.05)
+v3_t_tab4 <- topTable(eBayes3,coef="cancer_locPrimary Lung",p.value = 0.05)
+v3_t_tab5 <- topTable(eBayes3,coef="cancer_locPrimary HNSC",n=Inf)
+v3_t_tab6 <- topTable(eBayes3,coef="cancer_locPrimary Lung",n=Inf)
+gene_annot1 <- genes_annotator(v3_t_tab1)
+gene_annot2 <- genes_annotator(v3_t_tab2)
+gene_annot3 <- genes_annotator(v3_t_tab3) #with pval 0.05
+gene_annot4 <- genes_annotator(v3_t_tab4) # with pval  0.05
+gene_annot5 <- genes_annotator(v3_t_tab5)
+gene_annot6 <- genes_annotator(v3_t_tab6)
+knitr::kable(gene_annot1)
+knitr::kable(gene_annot2)
+knitr::kable(gene_annot3)
+knitr::kable(gene_annot4)
+knitr::kable(gene_annot5)
+```
+
+
+
+## Saving:
+
+
+
+```{r,eval=FALSE}
+write_csv(topTen_annotated,here("data","topTen_annotated_genes.csv"))
+write_csv(genes_int_t_table,here("data","twoGenes_of_interest.csv"))
+write_csv(primary_lung_annotated,here("data","primary_lung_annotatedlimma.csv"))
+write_csv(second_lung_annotated,here("data","secondary_lung_annotatedlimma.csv"))
+write_csv(hnsc_annotated,here("data","metastatic_hnsc_limma.csv"))
+```
+
+```{r,eval=FALSE}
+write_csv(v2_t_table,here("data","processed_data","primary_topGenes_limma2.csv"))
+write_csv(v2_t_table4,here("data","processed_data","age_top_genes_limma2.csv"))
+```
+
+```{r, eval=FALSE}
+v2_t_table6 <- topTable(eBayes2,coef = "cancer_typeprimary",n=Inf)
+saveRDS(v2_t_table6, here("data","processed_data","primary_limma2.rds"))
+```
+
+```{r,eval=FALSE}
+write_csv(gene_annot2,here("data","processed_data","primaryLung_topGenes_no0.05_limma3.csv"))
+write_csv(gene_annot1,here("data","processed_data","primaryHNSC_topGenes_no0.05_limma3.csv"))
+write_csv(gene_annot3,here("data","processed_data","primaryHNSC_topGenes_with0.05_limma3.csv"))
+```
+
+```{r,eval=FALSE}
+saveRDS(gene_annot5, here("data","processed_data","primaryHnsc_limma3.rds"))
+saveRDS(gene_annot6, here("data","processed_data","primarylung_limma3.rds"))
+```
+
+```{r, eval=FALSE}
+write_csv(male_metadata,here("data"))
+```
+
+
+

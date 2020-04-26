@@ -1,0 +1,17 @@
+---
+title: "Beta Density"
+author: "Denitsa Vasileva"
+date: "March 30, 2020"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(here)
+```
+
+![](../results/final/beta_density_plot.png)
+
+
+

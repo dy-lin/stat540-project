@@ -1,0 +1,41 @@
+---
+title: "GO"
+author: "Diana Lin"
+date: "29/03/2020"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load, include = FALSE}
+library(biomaRt)
+library(tidyverse)
+library(here)
+library(knitr)
+```
+
+```{r topten, message = FALSE}
+genes <- read_csv(
+    file = here("results","final", "primary_topGenes_limma2.csv")
+    )
+
+#kable(genes[11:15])
+
+hcgn <- genes$gene_HGNC %>%
+    str_split(";") %>%
+    unlist()
+```
+
+```{r annotate}
+ensembl<- useMart("ensembl",dataset="hsapiens_gene_ensembl")
+
+annotation <- getBM(attributes=c('hgnc_symbol', 'go_id', 'name_1006'), filters = 'hgnc_symbol', values=hcgn, mart= ensembl) %>% filter(go_id != "")
+
+write_csv(annotation, here("results", "scratch", "TopTen_GOterms_primary.csv"))
+
+kable(annotation)
+```
+
+

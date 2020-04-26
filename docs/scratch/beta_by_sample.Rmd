@@ -1,0 +1,48 @@
+---
+title: "Betas By Sample"
+author: "Almas K."
+date: '2020-03-13'
+output: github_document
+---
+
+## Libraries
+```{r}
+library(minfi)
+library(tidyverse)
+library(reshape2)
+library(here)
+```
+
+## Load Data
+
+```{r}
+raw_dat <- readRDS(here("data", "raw_data", "data.rds"))
+filtered_metadata <- readRDS(here("data","processed_data","metadata.rds"))
+```
+
+
+## Filter Loaded Data:
+
+```{r}
+male_metadata <- filtered_metadata %>%
+  filter(sex=="Male")
+data_to_clust <- raw_dat %>%
+  dplyr::select_if((names(.) %in% male_metadata$sample)) %>%
+  drop_na() 
+```
+
+## Generating Beta plots per sample
+```{r}
+metastatic <- filter(male_metadata,male_metadata$cancer_type=="metastatic")
+primary <- filter(male_metadata,!(male_metadata$cancer_type=="metastatic"))
+groups <- male_metadata$cancer_type
+metastatic_methyl <- data_to_clust %>%
+     dplyr::select_if((names(.) %in% metastatic$sample))
+primary_methyl <- data_to_clust %>%
+     dplyr::select_if((names(.) %in% primary$sample))
+
+minfi::densityPlot(as.matrix(metastatic_methyl),main="Metastatic")
+
+minfi::densityPlot(as.matrix(primary_methyl),main="Primary")
+minfi::densityPlot(as.matrix((data_to_clust)),sampGroups = groups)
+```

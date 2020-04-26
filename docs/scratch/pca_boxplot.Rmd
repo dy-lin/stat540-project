@@ -1,0 +1,396 @@
+---
+title: "pca_boxplot"
+author: "Diana Lin"
+date: "3/9/2020"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## PCA
+
+Load packages:
+```{r lib, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(here)
+library(lumi)
+```
+
+Import the metadata and expression data:
+```{r data, cache = TRUE, cache.lazy = FALSE}
+if (!exists("metadata", inherits = FALSE) ) {
+    metadata <-
+        readRDS(file = here("data", "processed_data", "metadata.rds"))
+}
+
+if (!exists("expr", inherits = FALSE)) {
+    expr <- readRDS(file = here("data","raw_data", "data.rds")) %>%
+        column_to_rownames(var = "CG")
+}
+
+if(!exists("combined", inherits = FALSE)) {
+    combined <- readRDS(file = here("data","processed_data","filtered_data.rds"))
+}
+```
+
+PCA Bar Chart:
+```{r pca-bar, cache = TRUE, cache.lazy = FALSE}
+if (!exists("scaled", inherits = FALSE)) {
+    if (file.exists(here("data", "processed_data", "scaled.rds"))) {
+        scaled <- readRDS(file = here("data", "processed_data", "scaled.rds"))
+    } else {
+        scaled <- t(scale(t(expr)))
+        saveRDS(scaled, file = here("data", "processed_data", "scaled.rds"))
+    }
+} 
+pcs <- prcomp(na.omit(scaled), center = FALSE, scale = FALSE)
+plot(pcs)
+```
+
+```{r pca}
+prinComp <-
+    cbind(metadata, pcs$rotation[metadata$sample, 1:10]) %>% 
+    dplyr::select(-sample)
+    
+plot(prinComp[, c("cancer", "cancer_type", "PC1", "PC2", "PC3")], pch = 19, cex = 0.8)
+```
+
+PCA for Source:
+``` {r source}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = source)) +
+        ggtitle("PCA: Source")
+```
+
+PCA for Cancer:
+```{r cancer}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = cancer)) +
+        ggtitle("PCA: Cancer")
+```
+
+PCA for Sex:
+```{r sex}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = sex)) +
+        ggtitle("PCA: Sex")
+```
+
+PCA for Age:
+```{r age}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = age)) +
+        ggtitle("PCA: Age")
+```
+
+PCA for Smoking status:
+```{r smoking}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = smoking_status)) +
+        ggtitle("PCA: Smoking status")
+```
+
+PCA for Packs smoked per year:
+```{r ppy}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = packs_per_year)) +
+        ggtitle("PCA: Packs smoked per year")
+```
+
+PCA for HPV status:
+```{r hpv}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = hpv)) +
+        ggtitle("PCA: HPV status")
+```
+
+PCA for p16:
+```{r p16}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = p16)) +
+        ggtitle("PCA: p16")
+```
+
+PCA for DNA quantity:
+```{r DNA}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = dna_ng)) +
+        ggtitle("PCA: DNA (ng)")
+```
+
+PCA for Tumour percentage:
+```{r tumour}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = tumour_percent)) +
+        ggtitle("PCA: Tumour percent")
+```
+
+PCA for Origin:
+```{r origin}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = origin)) +
+        ggtitle("PCA: Origin")
+```
+
+PCA for Cancer type:
+```{r cancer-type}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = cancer_type)) +
+        ggtitle("PCA: Cancer type")
+```
+
+## Box Plot
+
+```{r boxplot}
+combined %>%
+    ggplot(aes(x = sample, y = value)) +
+    geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90))
+
+combined %>%
+    ggplot(aes(x = sample, y = value)) +
+    geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    scale_y_continuous(trans = 'log2')
+```
+
+## PCA Plots with M values
+
+```{r pca-mval-barchart}
+if (!exists("expr_m", inherits = FALSE)) {
+    if (file.exists(here("data","processed_data","mvals.rds"))) {
+        expr_m <- readRDS(file = here("data", "processed_data", "mvals.rds"))
+    } else {
+        expr_m <- beta2m(expr)
+        saveRDS(expr_m, file = here("data","processed_data", "mvals.rds"))
+    }
+}
+
+pcs <- prcomp(na.omit(expr_m), center = FALSE, scale = FALSE)
+plot(pcs)
+```
+
+
+```{r pca-mval}
+prinComp <-
+    cbind(metadata, pcs$rotation[metadata$sample, 1:10]) %>% 
+    dplyr::select(-sample)
+    
+plot(prinComp[, c("cancer", "PC1", "PC2", "PC3")], pch = 19, cex = 0.8)
+```
+
+PCA for Source:
+``` {r source-mval}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = source)) +
+        ggtitle("PCA: Source")
+```
+
+PCA for Cancer:
+```{r cancer-mval}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = cancer)) +
+        ggtitle("PCA: Cancer")
+```
+
+PCA for Sex:
+```{r sex-mval}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = sex)) +
+        ggtitle("PCA: Sex")
+```
+
+PCA for Age:
+```{r age-mval}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = age)) +
+        ggtitle("PCA: Age")
+```
+
+PCA for Smoking status:
+```{r smoking-mval}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = smoking_status)) +
+        ggtitle("PCA: Smoking status")
+```
+
+PCA for Packs smoked per year:
+```{r ppy-mval}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = packs_per_year)) +
+        ggtitle("PCA: Packs smoked per year")
+```
+
+PCA for HPV status:
+```{r hpv-mval}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = hpv)) +
+        ggtitle("PCA: HPV status")
+```
+
+PCA for p16:
+```{r p16-mval}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = p16)) +
+        ggtitle("PCA: p16")
+```
+
+PCA for DNA quantity:
+```{r DNA-mval}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = dna_ng)) +
+        ggtitle("PCA: DNA (ng)")
+```
+
+PCA for Tumour percentage:
+```{r tumour-mval}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = tumour_percent)) +
+        ggtitle("PCA: Tumour percent")
+```
+
+PCA for Origin:
+```{r origin-mval}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = origin)) +
+        ggtitle("PCA: Origin")
+```
+
+PCA for Cancer type:
+```{r cancer-type-mval}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = cancer_type)) +
+        ggtitle("PCA: Cancer type")
+```
+
+## PCA Plots with Scaled M values
+
+```{r pca-mval-scaled-barchart}
+if (!exists("expr_m_scaled", inherits = FALSE)) {
+    if (file.exists(here("data","processed_data","mvals_scaled.rds"))) {
+        expr_m_scaled <- readRDS(file = here("data", "processed_data", "mvals_scaled.rds"))
+    } else {
+        expr_m_scaled <- t(scale(t(expr_m)))
+        saveRDS(expr_m_scaled, file = here("data", "processed_data", "mvals_scaled.rds"))
+    }
+}
+pcs <- prcomp(na.omit(expr_m_scaled), center = FALSE, scale = FALSE)
+plot(pcs)
+```
+
+
+```{r pca-mval-scaled}
+prinComp <-
+    cbind(metadata, pcs$rotation[metadata$sample, 1:10]) %>% 
+    dplyr::select(-sample)
+    
+plot(prinComp[, c("cancer", "PC1", "PC2", "PC3")], pch = 19, cex = 0.8)
+```
+
+PCA for Source:
+``` {r source-mval-scaled}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = source)) +
+        ggtitle("PCA: Source")
+```
+
+PCA for Cancer:
+```{r cancer-mval-scaled}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = cancer)) +
+        ggtitle("PCA: Cancer")
+```
+
+PCA for Sex:
+```{r sex-mval-scaled}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = sex)) +
+        ggtitle("PCA: Sex")
+```
+
+PCA for Age:
+```{r age-mval-scaled}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = age)) +
+        ggtitle("PCA: Age")
+```
+
+PCA for Smoking status:
+```{r smoking-mval-scaled}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = smoking_status)) +
+        ggtitle("PCA: Smoking status")
+```
+
+PCA for Packs smoked per year:
+```{r ppy-mval-scaled}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = packs_per_year)) +
+        ggtitle("PCA: Packs smoked per year")
+```
+
+PCA for HPV status:
+```{r hpv-mval-scaled}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = hpv)) +
+        ggtitle("PCA: HPV status")
+```
+
+PCA for p16:
+```{r p16-mval-scaled}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = p16)) +
+        ggtitle("PCA: p16")
+```
+
+PCA for DNA quantity:
+```{r DNA-mval-scaled}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = dna_ng)) +
+        ggtitle("PCA: DNA (ng)")
+```
+
+PCA for Tumour percentage:
+```{r tumour-mval-scaled}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = tumour_percent)) +
+        ggtitle("PCA: Tumour percent")
+```
+
+PCA for Origin:
+```{r origin-mval-scaled}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = origin)) +
+        ggtitle("PCA: Origin")
+```
+
+PCA for Cancer type:
+```{r cancer-type-mval-scaled}
+ggplot(prinComp, aes(x = PC1, y = PC2)) +
+        geom_point(aes(colour = cancer_type)) +
+        ggtitle("PCA: Cancer type")
+```
+
+## Boxplot with M values
+
+```{r boxplot-mval, eval = FALSE, include = FALSE}
+expr_filtered <- readRDS(here("data", "processed_data", "filtered_data.rds"))
+
+expr_m_filtered <- expr_filtered
+
+expr_m_filtered$value <- beta2m(expr_filtered$value)
+
+boxplot_m <- expr_m_filtered %>%
+    ggplot(aes(x = sample, y = value)) +
+    geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90),
+          legend.title = element_text(text = "Cancer Type"))
+
+boxplot_m_log <- expr_m_filtered %>%
+    ggplot(aes(x = sample, y = value)) +
+    geom_boxplot() +
+    theme(axis.text.x = element_text(angle = 90)) +
+    scale_y_continuous(trans = 'log2')
+```

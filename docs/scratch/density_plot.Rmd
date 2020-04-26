@@ -1,0 +1,67 @@
+---
+title: "density_plots"
+author: "Denitsa Vasileva"
+date: '2020-03-11'
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Packages
+
+```{r}
+library(pheatmap)
+library(dplyr)
+library(here)
+library(ggplot2)
+```
+
+# Reading in data_subset file
+
+```{r}
+data_subset <- readRDS(here("data", "processed_data", "filtered_data.rds"))
+```
+
+
+# Density Plot of p-values
+
+```{r}
+# Code modified from seminar 3 tutorial
+
+data1<-data_subset %>%
+  group_by(CG)%>%
+  summarize( pvalue = t.test(value ~ cancer_type)$p.value) %>%
+  ggplot(aes(x =pvalue)) + geom_density()+ggtitle("Density Plot")
+  
+```
+
+# Density Plot of beta values
+
+```{r}
+
+# Separating two different cancer types- metastatic and primary
+met<-data_subset %>% 
+  filter(cancer_type=="metastatic")
+pri <- data_subset %>%
+  filter(cancer_type=="primary")
+
+# Code modified from Seminar 7 tutorial
+probeMeans <- c(rowMeans(as.data.frame(met$value), na.rm = T),rowMeans(as.data.frame(pri$value), na.rm = T)) 
+plotDat <- data.frame(Beta = probeMeans,
+                      Dataset = rep(c('met', 'pri')))
+(probeAvg <- ggplot(data = plotDat, aes(x = Beta, col = Dataset)) +
+   geom_density() + 
+   ggtitle("Average Beta value density of two experiments") + 
+   xlab("Beta") + 
+   ylab("Density") + 
+   theme_bw()
+)
+```
+
+
+
+
+
+

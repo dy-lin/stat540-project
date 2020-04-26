@@ -1,0 +1,15 @@
+---
+title: "Hierarchical Clustering"
+author: "Almas"
+date: "03/04/2020"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(here)
+```
+
+
+![heatmap](../results/final/heatmap_with_clusters.png)

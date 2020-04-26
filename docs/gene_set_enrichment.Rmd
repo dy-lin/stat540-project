@@ -1,0 +1,68 @@
+---
+title: "Gene Set Enrichment"
+author: "Almas K."
+date: '2020-03-31'
+output: github_document
+---
+
+## Libraries 
+```{r}
+library(tidyverse)
+library(ermineR)
+library(reshape2)
+library(devtools)
+library(here)
+```
+
+
+## Data 
+
+```{r}
+geneList <- read_csv(here("results", "final","primary_topGenes_limma2.csv"))
+ annotation_v <-  read_csv(here("results", "scratch", "TopTen_GOterms.csv"))
+```
+
+```{r}
+# download the latest GO.xml file if it doesn't already exist
+if (!file.exists(here("results", "scratch", "GO.xml"))) { goToday("GO.xml") }
+```
+
+
+
+```{r}
+ermineInputGeneScores <- geneList %>% 
+  mutate(absolute_logFC = abs(logFC)) %>% 
+  dplyr::select(gene, absolute_logFC) %>% 
+  na.omit() %>% 
+  as.data.frame() %>% 
+  arrange(desc(absolute_logFC)) %>% 
+  column_to_rownames("gene")
+
+head(ermineInputGeneScores) # print the first few rows
+```
+
+```{r, eval=FALSE, error=TRUE,message=TRUE}
+enrichmentResult <- precRecall(scores = ermineInputGeneScores, 
+                               scoreColumn = 1, # column 1 is the scores 
+                               bigIsBetter = TRUE, # larger logFC should be ranked higher
+                               annotation = annotation_v, # ask ermineJ to use the Generic_human annotation file (will automatically download)
+                               aspects = "B", # look at only biological processes 
+                               iterations = 10000, # 10K sampling iterations so that results are stable
+                               geneSetDescription = "GO.xml") # use the GO XML file in current directory
+```
+
+### Error Message
+
+```
+Error in (function (annotation = NULL, aspects = c("Molecular Function", : Something went wrong. 
+Blame the dev 
+INFO: Data directory is /Users/almas/ermineJ.data 
+DEBUG: Custom gene sets directory is /Users/almas/ermineJ.data/genesets 
+DEBUG: Setting score start column to 2 
+INFO: Gene symbols for each term will be output Reading GO descriptions from /Users/almas/Documents/GitHub/Repo_team_The-Splice-Girls_W2020/src/GO.xml ... 
+INFO: Could not locate aspect for GO:0018704: obsolete 5-chloro-2-hydroxymuconic semialdehyde dehalogenase activity
+INFO: Could not locate aspect for GO:0006494: obsolete protein amino acid terminal glycosylation 
+INFO: Could not locate aspect for GO:0006496: obsolete protein amino acid terminal N-glycosylation 
+INFO: Could not locate aspect for GO:0090413: obsolete negative regulation of transcription from RNA polymerase II promoter involved in fatty acid biosynthetic process 
+INFO: Could not locate aspect for GO:0090412: obsolete positive regulation of transcription from RNA polymerase II promoter involved in fatty acid biosynthet
+```

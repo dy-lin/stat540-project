@@ -1,0 +1,39 @@
+---
+title: "Data Exploration"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Load packages:
+```{r load pkg, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(here)
+library(knitr)
+```
+
+Load the metadata:
+```{r load metadata}
+metadata <- read_csv(here("data","processed_data","metadata.csv"), col_types = cols(
+    sample = col_factor(),
+    source = col_factor(),
+    cancer = col_factor(),
+    sex = col_factor(),
+    age = col_double(),
+    smoking_status = col_factor(),
+    packs_per_year = col_double(),
+    hpv = col_factor(),
+    p16 = col_factor(),
+    dna_ng = col_double(),
+    tumour_percent = col_double(),
+    origin = col_factor()
+))
+
+kable(metadata)
+```
+
+```{r summary}
+summary(metadata)
+```
+
