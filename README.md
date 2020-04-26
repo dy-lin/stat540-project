@@ -1,4 +1,5 @@
 # The Splice Girls
+This repository is a clone of the _private_ [repository](https://github.com/STAT540-UBC/Repo_team_The-Splice-Girls_W2020) under the STAT540 organization.
 ## Table of Contents
 1. [Team Members](#team-members)
 1. [Project Proposal](#project-proposal)
