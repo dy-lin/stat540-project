@@ -1,0 +1,24 @@
+# RStudio files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# Data files - CSV (too large to be pushed)
+data/raw_data/gds.rds
+data/processed_data/combined_data.csv
+data/processed_data/filtered_data.csv
+data/processed_data/data.csv
+data/raw_data/data.csv
+
+# Caches - to make knitting faster
+src/data_fetching_cache/*
+data/README_cache/*
+*/*_cache/*
+
+# RDS objects that are too big to be pushed
+data/processed_data/combined_data.rds
+data/processed_data/data.rds
+data/processed_data/filtered_data.rds
+data/raw_data/data.rds
