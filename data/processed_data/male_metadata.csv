@@ -1,0 +1,53 @@
+sample,source,cancer,sex,age,smoking_status,packs_per_year,hpv,p16,dna_ng,tumour_percent,origin,cancer_type
+GSM3519721,Lung biopsy,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,64,Active ,60,"NA",Negative,144,90,Larynx,metastatic
+GSM3519722,Lung biopsy,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,64,Active ,40,"NA",Positive,500,90,Hypopharynx,metastatic
+GSM3519723,Lung biopsy,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,57,Active ,NA,"NA",Negative,500,90,Hypopharynx,metastatic
+GSM3519724,Lung resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,66,Former,120,HPV16,Positive,500,90,Oropharynx,metastatic
+GSM3519725,Lung resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,59,Active ,NA,"NA",Positive,400,90,Oral cavity,metastatic
+GSM3519726,Lung biopsy,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,59,Active ,50,Negative,Negative,500,80,Hypopharynx,metastatic
+GSM3519727,Lung biopsy,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,45,Former,50,"HPV6, HPV 16",Positive,500,100,Hypopharynx,metastatic
+GSM3519728,Lung resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,49,Active ,30,"NA",Negative,200,90,Oral cavity,metastatic
+GSM3519729,Lung resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,61,Active ,100,"NA",Negative,500,90,Larynx,metastatic
+GSM3519730,Lung resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,68,Former,50,"NA",Negative,500,90,Oral cavity,metastatic
+GSM3519731,Lung biopsy,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,57,Active ,NA,Negative,Positive,130,70,Oral cavity,metastatic
+GSM3519732,Lung biopsy,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,55,Former,40,Negative,Negative,240,90,Oral cavity,metastatic
+GSM3519734,Lung resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,64,"NA",NA,Negative,Negative,400,90,Larynx,metastatic
+GSM3519735,Lung biopsy,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,69,Active ,50,HPV16,Positive,500,90,Oropharynx,metastatic
+GSM3519736,Lung resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,63,Former,60,HPV11,Positive,500,80,Oral cavity,metastatic
+GSM3519737,Lung resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,46,Former,6,HPV16,Positive,500,80,Oropharynx,metastatic
+GSM3519738,Lung resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,58,Active ,80,"NA",Positive,500,90,Oropharynx,metastatic
+GSM3519739,Lung resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,58,Active ,NA,"NA",Negative,500,90,Oral cavity,metastatic
+GSM3519740,Lung resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,49,Former,NA,"NA",Negative,500,80,Tongue,metastatic
+GSM3519742,Lung resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,52,Former,120,"NA",Positive,200,90,Oropharynx,metastatic
+GSM3519743,Lung resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,55,"NA",NA,"HPV16, HPV18",Negative,500,90,Oropharynx,metastatic
+GSM3519744,Lung resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,71,Active ,50,"NA",Negative,500,100,Hypopharynx,metastatic
+GSM3519745,Lung resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,64,Former,NA,"NA",Positive,500,90,Larynx,metastatic
+GSM3519746,Lung biopsy,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,52,Active ,NA,Negative,Negative,120,90,Oral cavity,metastatic
+GSM3519747,Lung resection,Second squamous cell carcinoma of the lung,Male,56,Active ,80,"NA",Negative,500,80,NA,primary
+GSM3519748,Lung resection,Second squamous cell carcinoma of the lung,Male,59,Active ,50,Negative,Negative,500,90,NA,primary
+GSM3519749,Biopsy,Second squamous cell carcinoma of the lung,Male,73,Former,55,"NA",Positive,500,90,NA,primary
+GSM3519750,Lung resection,Second squamous cell carcinoma of the lung,Male,75,Former,NA,Negative,Negative,480,90,NA,primary
+GSM3519751,Lung resection,Second squamous cell carcinoma of the lung,Male,65,Active ,NA,Negative,Positive,110,80,NA,primary
+GSM3519752,Lung resection,Second squamous cell carcinoma of the lung,Male,77,Active ,60,"NA",Negative,500,70,NA,primary
+GSM3519753,Lung resection,Second squamous cell carcinoma of the lung,Male,83,"NA",NA,"NA",Negative,500,90,NA,primary
+GSM3519754,Lung resection,Second squamous cell carcinoma of the lung,Male,63,Active ,40,"NA",Negative,500,90,NA,primary
+GSM3519755,Lung resection,Second squamous cell carcinoma of the lung,Male,59,Active ,40,"NA",Positive,500,100,NA,primary
+GSM3519757,Lung resection,Second squamous cell carcinoma of the lung,Male,55,Active ,NA,HPV16,Positive,480,90,NA,primary
+GSM3519758,Lung resection,Second squamous cell carcinoma of the lung,Male,56,Active ,60,"NA",Positive,500,90,NA,primary
+GSM3519759,Lung resection,Second squamous cell carcinoma of the lung,Male,78,Active ,50,"NA",Negative,500,90,NA,primary
+GSM3519760,Lung resection,Second squamous cell carcinoma of the lung,Male,57,Active ,NA,"NA",Negative,500,90,NA,primary
+GSM3519761,Lung biopsy,Second squamous cell carcinoma of the lung,Male,81,"NA",NA,"NA",Negative,500,90,NA,primary
+GSM3519762,Lung biopsy,Second squamous cell carcinoma of the lung,Male,62,Former,30,"NA",Negative,500,80,NA,primary
+GSM3519765,Resection,Primary head and neck squamous cell carcinoma,Male,62,Active ,10,"NA",Positive,500,80,Oral cavity,primary
+GSM3519767,Resection,Primary head and neck squamous cell carcinoma,Male,59,"NA",NA,"NA",Negative,500,90,Oropharynx,primary
+GSM3519769,Resection,Primary head and neck squamous cell carcinoma,Male,69,Active ,40,"NA",Negative,500,70,Larynx,primary
+GSM3519770,Lung resection,Primary lung squamous cell carcinoma,Male,63,"NA",NA,"NA",Negative,500,80,NA,primary
+GSM3519771,Lung resection,Primary lung squamous cell carcinoma,Male,83,Former,30,"NA",Negative,500,80,NA,primary
+GSM3519772,Lung resection,Primary lung squamous cell carcinoma,Male,58,Active ,10,"NA",Negative,500,80,NA,primary
+GSM3519773,Lung resection,Primary lung squamous cell carcinoma,Male,82,Active ,NA,"NA",Negative,500,90,NA,primary
+GSM3519774,Lung resection,Primary lung squamous cell carcinoma,Male,70,Former,40,"NA",Positive,500,90,NA,primary
+GSM3780872,Resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,69,Active ,60,"NA",Negative,500,80,Oral cavity,metastatic
+GSM3780873,Resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,74,Former,40,"NA",Positive,500,80,Larynx,metastatic
+GSM3780875,Biopsy,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,61,Active ,100,"NA",Negative,500,90,Oral cavity,metastatic
+GSM3780876,Resection,Pulmonary metastasis of head and neck squamous cell carcinoma,Male,71,Former,30,"NA",Positive,500,90,Oropharynx,metastatic
+GSM3780877,Resection,Second squamous cell carcinoma of the lung,Male,71,Active ,40,"NA",Negative,500,80,NA,primary

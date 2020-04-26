@@ -1,0 +1,120 @@
+---
+title: "About the Data"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE)
+```
+
+The directory [`raw_data/`](raw_data/) consists of data downloaded directly from the source (e.g. GEO), while the [`processed_data/`](processed_data/) directory consists of the wrangled and reshaped data. Each subdirectory has its own `README.md` with more information.
+
+## Table of Contents
+
+1. [Metadata](#metadata)
+    1. [Metadata Characteristics](#metadata-characteristics)
+        1. [Metadata Summary](#metadata-summary)
+    1. [Filtered Metadata](#filtered-metadata)
+        1. [Filtered Metadata Summary](#filtered-metadata-summary)
+1. [Methylation Data](#methylation-data)
+1. [Combining Metadata and Methylation Data](#combining-the-metadata-and-methylation-data)
+1. [Experimental Design](#experimental-design)
+
+```{r, echo = FALSE}
+library(tidyverse)
+library(here)
+library(knitr)
+```
+
+Our dataset is a publicly available methylation dataset from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE124052).
+
+## Metadata
+
+
+### Metadata Characteristics
+Our full metadata (including corresponding author, etc.) can be found here in [`raw_data/metadata.rds`](raw_data/metadata.rds). However, for the purposes of this document, we will be talking about the characterstics only, which are found in [`processed_data/metadata.rds`](processed_data/metadata.rds).
+
+```{r metadata}
+metadata <- readRDS(file = here("data","processed_data", "metadata.rds"))
+```
+
+The characteristics given for our dataset are:
+```{r characteristics}
+colnames(metadata)
+```
+
+Our metadata shows that are 61 samples in this dataset:
+```{r}
+nrow(metadata)
+```
+
+So our metadata is a 61x12 dataframe:
+```{r size}
+ncol(metadata)
+```
+##### Metadata Summary
+
+Here is a summary of the metadata:
+
+```{r summary}
+summary(metadata)
+```
+
+#### Filtered Metadata
+
+##### Filtered Metadata Summary
+In our analysis, we will only be looking at `males` as there is a huge imbalance of 52 males to 9 females. Here is the summary if we exclude females:
+```{r filtered_meta}
+metadata %>%
+    filter(sex == "Male") %>%
+    summary()
+```
+
+Here is a brief glimpse into our metadata:
+
+```{r metadata glimpse}
+head(metadata, n = 2L) %>%
+    kable()
+```
+
+
+## Methylation Data
+Our full methylation data can be found in `raw_data/data.csv`, which is too large to be uploaded to the GitHub repository. Here we show the column names of our methylation data:
+```{r methylation_full}
+methylation_full <- readRDS(here("data","raw_data","data.rds"))
+colnames(methylation_full)
+```
+
+Here we show the number of methylated sites in our dataset (corresponding to the number of rows in the data frame):
+```{r sites}
+(num_sites <- nrow(methylation_full))
+```
+
+The first column of this data frame contain our `r num_sites` methylation sites:
+```{r first column}
+head(methylation_full[1])
+```
+
+And, as expected, the number of columns in this data frame is the same as the number of samples we have (excluding the first column which is the methylation site names):
+```{r ncols}
+ncol(methylation_full[-1])
+```
+
+Our methylation data is a `r num_sites`x61 dataframe. Here is a glimpse into it:
+```{r glimpse data}
+head(methylation_full, n = 2L) %>%
+    kable()
+```
+
+## Combining the Metadata and Methylation Data
+When combining our metadata and methylation data, the dataset looks like this (with reduced number of characteristics):
+```{r combined, cache.lazy = FALSE}
+combined <- readRDS(here("data", "processed_data", "filtered_data.rds"))
+head(combined, n = 2L) %>%
+    kable()
+```
+
+
+## Experimental Design
+The experimental design of the [paper](https://www.ncbi.nlm.nih.gov/pubmed/31511427) where we obtained this dataset was to classify cancers as primary or metastatic cancers based on their methylation profiles. Our [male subset](#filtered-metadata-summary) consists of both raw and noob-normalized beta values measured from 51 male participants using  the Illumina Infinium MethylationEPIC BeadChip. Each of the participants was diagnosed with  either primary LUSC or lung metastases from  HNSCC. The type of cancer was ascertained using histopathology as well as  clinical and radiological evidence from an expert panel. The male samples were between the ages of 45-80 years old and were either former or active smokers at the time of recruitment. For information on the full dataset (including females), see the summary [above](#metadata-summary).
+

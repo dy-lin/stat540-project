@@ -1,0 +1,178 @@
+hgnc_symbol,go_id,name_1006
+CBX5,GO:0005634,nucleus
+CBX5,GO:0005654,nucleoplasm
+CBX5,GO:0005694,chromosome
+CBX5,GO:0005515,protein binding
+CBX5,GO:0006974,cellular response to DNA damage stimulus
+CBX5,GO:0042802,identical protein binding
+CBX5,GO:0000775,"chromosome, centromeric region"
+CBX5,GO:0000122,negative regulation of transcription by RNA polymerase II
+CBX5,GO:0032991,protein-containing complex
+CBX5,GO:0000784,"nuclear chromosome, telomeric region"
+CBX5,GO:0016032,viral process
+CBX5,GO:0043021,ribonucleoprotein complex binding
+CBX5,GO:1990904,ribonucleoprotein complex
+CBX5,GO:0005635,nuclear envelope
+CBX5,GO:0045892,"negative regulation of transcription, DNA-templated"
+CBX5,GO:0070317,negative regulation of G0 to G1 transition
+CBX5,GO:0044877,protein-containing complex binding
+CBX5,GO:0035064,methylated histone binding
+CBX5,GO:0005730,nucleolus
+CBX5,GO:0030674,"protein binding, bridging"
+CBX5,GO:0007596,blood coagulation
+CBX5,GO:0017053,transcriptional repressor complex
+CBX5,GO:0016605,PML body
+CBX5,GO:0005721,pericentric heterochromatin
+CBX5,GO:0090734,site of DNA damage
+CBX5,GO:0000118,histone deacetylase complex
+CBX5,GO:0070491,repressing transcription factor binding
+CBX5,GO:0031618,nuclear pericentric heterochromatin
+CBX5,GO:0003682,chromatin binding
+CBX5,GO:0042826,histone deacetylase binding
+CBX5,GO:0000776,kinetochore
+CBX5,GO:0000792,heterochromatin
+CBX5,GO:0005720,nuclear heterochromatin
+CBX5,GO:0010369,chromocenter
+CBX5,GO:0035097,histone methyltransferase complex
+CCK,GO:0005576,extracellular region
+CCK,GO:0005179,hormone activity
+CCK,GO:0030424,axon
+CCK,GO:0007409,axonogenesis
+CCK,GO:0007186,G protein-coupled receptor signaling pathway
+CCK,GO:0007165,signal transduction
+CCK,GO:0005184,neuropeptide hormone activity
+CCK,GO:0001764,neuron migration
+CCK,GO:0051428,peptide hormone receptor binding
+CCK,GO:0007586,digestion
+CCK,GO:0042755,eating behavior
+CCK,GO:0001836,release of cytochrome c from mitochondria
+CCK,GO:0006915,apoptotic process
+CCK,GO:0006919,activation of cysteine-type endopeptidase activity involved in apoptotic process
+CCK,GO:0007205,protein kinase C-activating G protein-coupled receptor signaling pathway
+CCK,GO:0007613,memory
+CCK,GO:0008284,positive regulation of cell population proliferation
+CCK,GO:0008542,visual learning
+CCK,GO:0014049,positive regulation of glutamate secretion
+CCK,GO:0031334,positive regulation of protein complex assembly
+CCK,GO:0032099,negative regulation of appetite
+CCK,GO:0043065,positive regulation of apoptotic process
+CCK,GO:0050731,positive regulation of peptidyl-tyrosine phosphorylation
+CCK,GO:0051901,positive regulation of mitochondrial depolarization
+CCK,GO:0051930,regulation of sensory perception of pain
+CCK,GO:1903999,negative regulation of eating behavior
+CCK,GO:1904058,positive regulation of sensory perception of pain
+CCK,GO:2000986,negative regulation of behavioral fear response
+CCK,GO:2000987,positive regulation of behavioral fear response
+CCK,GO:0005615,extracellular space
+CCK,GO:0030425,dendrite
+CCK,GO:0043025,neuronal cell body
+CCK,GO:0043194,axon initial segment
+CCK,GO:0043195,terminal bouton
+CCK,GO:0043203,axon hillock
+CCK,GO:0043204,perikaryon
+CDC6,GO:0006270,DNA replication initiation
+CDC6,GO:0051301,cell division
+CDC6,GO:0005634,nucleus
+CDC6,GO:0005737,cytoplasm
+CDC6,GO:0000166,nucleotide binding
+CDC6,GO:0005524,ATP binding
+CDC6,GO:0005515,protein binding
+CDC6,GO:0045737,positive regulation of cyclin-dependent protein serine/threonine kinase activity
+CDC6,GO:0048146,positive regulation of fibroblast proliferation
+CDC6,GO:1904117,cellular response to vasopressin
+CDC6,GO:1904385,cellular response to angiotensin
+CDC6,GO:0007049,cell cycle
+CDC6,GO:0006260,DNA replication
+CDC6,GO:0000278,mitotic cell cycle
+CDC6,GO:0005654,nucleoplasm
+CDC6,GO:0005829,cytosol
+CDC6,GO:0000082,G1/S transition of mitotic cell cycle
+CDC6,GO:0008285,negative regulation of cell population proliferation
+CDC6,GO:0003688,DNA replication origin binding
+CDC6,GO:0019900,kinase binding
+CDC6,GO:0000079,regulation of cyclin-dependent protein serine/threonine kinase activity
+CDC6,GO:0033314,mitotic DNA replication checkpoint
+CDC6,GO:0000076,DNA replication checkpoint
+CDC6,GO:0000083,regulation of transcription involved in G1/S transition of mitotic cell cycle
+CDC6,GO:0000922,spindle pole
+CDC6,GO:0008156,negative regulation of DNA replication
+CDC6,GO:0030071,regulation of mitotic metaphase/anaphase transition
+CDC6,GO:0051233,spindle midzone
+CDC6,GO:0007089,traversing start control point of mitotic cell cycle
+CDC6,GO:0032467,positive regulation of cytokinesis
+CDC6,GO:0051984,positive regulation of chromosome segregation
+ISY1-RAB43,GO:0000350,generation of catalytic spliceosome for second transesterification step
+NME7,GO:0005524,ATP binding
+NME7,GO:0004550,nucleoside diphosphate kinase activity
+NME7,GO:0006165,nucleoside diphosphate phosphorylation
+NME7,GO:0006183,GTP biosynthetic process
+NME7,GO:0006228,UTP biosynthetic process
+NME7,GO:0006241,CTP biosynthetic process
+NME7,GO:0046872,metal ion binding
+NME7,GO:0000166,nucleotide binding
+NME7,GO:0016301,kinase activity
+NME7,GO:0016740,transferase activity
+NME7,GO:0016310,phosphorylation
+NME7,GO:0005515,protein binding
+NME7,GO:0009117,nucleotide metabolic process
+NME7,GO:0005813,centrosome
+NME7,GO:0005829,cytosol
+OLFML2A,GO:0005576,extracellular region
+OLFML2A,GO:0042802,identical protein binding
+OLFML2A,GO:0050840,extracellular matrix binding
+OLFML2A,GO:0030198,extracellular matrix organization
+OLFML2A,GO:0031012,extracellular matrix
+SIM2,GO:0003677,DNA binding
+SIM2,GO:0006355,"regulation of transcription, DNA-templated"
+SIM2,GO:0005515,protein binding
+SIM2,GO:0003700,DNA-binding transcription factor activity
+SIM2,GO:0046983,protein dimerization activity
+SIM2,GO:0005634,nucleus
+SIM2,GO:0005654,nucleoplasm
+SIM2,GO:0016604,nuclear body
+SIM2,GO:0007275,multicellular organism development
+SIM2,GO:0030154,cell differentiation
+SIM2,GO:0007399,nervous system development
+SIM2,GO:0000981,"DNA-binding transcription factor activity, RNA polymerase II-specific"
+SIM2,GO:0006357,regulation of transcription by RNA polymerase II
+SIM2,GO:0045944,positive regulation of transcription by RNA polymerase II
+SIM2,GO:0000790,nuclear chromatin
+SIM2,GO:0046982,protein heterodimerization activity
+SIM2,GO:0000122,negative regulation of transcription by RNA polymerase II
+SIM2,GO:0009880,embryonic pattern specification
+SIM2,GO:0030324,lung development
+SIM2,GO:0045892,"negative regulation of transcription, DNA-templated"
+SLFN11,GO:0005524,ATP binding
+SLFN11,GO:0003723,RNA binding
+SLFN11,GO:0005634,nucleus
+SLFN11,GO:0000166,nucleotide binding
+SLFN11,GO:0005654,nucleoplasm
+SLFN11,GO:0005829,cytosol
+SLFN11,GO:0016787,hydrolase activity
+SLFN11,GO:0005694,chromosome
+SLFN11,GO:0006974,cellular response to DNA damage stimulus
+SLFN11,GO:0000049,tRNA binding
+SLFN11,GO:0016887,ATPase activity
+SLFN11,GO:0004386,helicase activity
+SLFN11,GO:0002376,immune system process
+SLFN11,GO:0051607,defense response to virus
+SLFN11,GO:0005515,protein binding
+SLFN11,GO:0010942,positive regulation of cell death
+SLFN11,GO:0008156,negative regulation of DNA replication
+SLFN11,GO:2000134,negative regulation of G1/S transition of mitotic cell cycle
+SLFN11,GO:0090734,site of DNA damage
+SLFN11,GO:0043111,replication fork arrest
+SLFN11,GO:0004521,endoribonuclease activity
+SLFN11,GO:0008270,zinc ion binding
+SLFN11,GO:0016075,rRNA catabolic process
+SLFN11,GO:0016078,tRNA catabolic process
+TBC1D25,GO:0005737,cytoplasm
+TBC1D25,GO:0005515,protein binding
+TBC1D25,GO:0031410,cytoplasmic vesicle
+TBC1D25,GO:0006914,autophagy
+TBC1D25,GO:0005096,GTPase activator activity
+TBC1D25,GO:0017137,Rab GTPase binding
+TBC1D25,GO:0006886,intracellular protein transport
+TBC1D25,GO:0090630,activation of GTPase activity
+TBC1D25,GO:0005776,autophagosome
+TBC1D25,GO:1901096,regulation of autophagosome maturation
