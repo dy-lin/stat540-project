@@ -1,0 +1,261 @@
+hgnc_symbol,go_id,name_1006
+CLCF1,GO:0008284,positive regulation of cell population proliferation
+CLCF1,GO:0042531,positive regulation of tyrosine phosphorylation of STAT protein
+CLCF1,GO:0005615,extracellular space
+CLCF1,GO:0005576,extracellular region
+CLCF1,GO:0005125,cytokine activity
+CLCF1,GO:0007166,cell surface receptor signaling pathway
+CLCF1,GO:0005515,protein binding
+CLCF1,GO:0019221,cytokine-mediated signaling pathway
+CLCF1,GO:0005102,signaling receptor binding
+CLCF1,GO:0043524,negative regulation of neuron apoptotic process
+CLCF1,GO:0005127,ciliary neurotrophic factor receptor binding
+CLCF1,GO:0097058,CRLF-CLCF1 complex
+CLCF1,GO:0030890,positive regulation of B cell proliferation
+CLCF1,GO:0008083,growth factor activity
+CLCF1,GO:0030183,B cell differentiation
+CLCF1,GO:0048711,positive regulation of astrocyte differentiation
+CLCF1,GO:0007259,receptor signaling pathway via JAK-STAT
+CLCF1,GO:0097059,CNTFR-CLCF1 complex
+CLCF1,GO:0002639,positive regulation of immunoglobulin production
+CLCF1,GO:0048295,positive regulation of isotype switching to IgE isotypes
+HDAC9,GO:0090050,positive regulation of cell migration involved in sprouting angiogenesis
+HDAC9,GO:0042632,cholesterol homeostasis
+HDAC9,GO:0005737,cytoplasm
+HDAC9,GO:0005634,nucleus
+HDAC9,GO:0032869,cellular response to insulin stimulus
+HDAC9,GO:0046872,metal ion binding
+HDAC9,GO:0016787,hydrolase activity
+HDAC9,GO:0006325,chromatin organization
+HDAC9,GO:0005515,protein binding
+HDAC9,GO:0006954,inflammatory response
+HDAC9,GO:0004407,histone deacetylase activity
+HDAC9,GO:0016575,histone deacetylation
+HDAC9,GO:0032041,NAD-dependent histone deacetylase activity (H3-K14 specific)
+HDAC9,GO:0005654,nucleoplasm
+HDAC9,GO:0042113,B cell activation
+HDAC9,GO:0000118,histone deacetylase complex
+HDAC9,GO:0005667,transcription factor complex
+HDAC9,GO:0008134,transcription factor binding
+HDAC9,GO:0000122,negative regulation of transcription by RNA polymerase II
+HDAC9,GO:0045892,"negative regulation of transcription, DNA-templated"
+HDAC9,GO:0007507,heart development
+HDAC9,GO:0003714,transcription corepressor activity
+HDAC9,GO:0035097,histone methyltransferase complex
+HDAC9,GO:0042826,histone deacetylase binding
+HDAC9,GO:0005080,protein kinase C binding
+HDAC9,GO:0030183,B cell differentiation
+HDAC9,GO:0070491,repressing transcription factor binding
+HDAC9,GO:0050710,negative regulation of cytokine secretion
+HDAC9,GO:0033558,protein deacetylase activity
+HDAC9,GO:0034983,peptidyl-lysine deacetylation
+HDAC9,GO:0070932,histone H3 deacetylation
+HDAC9,GO:0070933,histone H4 deacetylation
+HDAC9,GO:0048742,regulation of skeletal muscle fiber development
+HDAC9,GO:0051005,negative regulation of lipoprotein lipase activity
+HDAC9,GO:0034739,histone deacetylase activity (H4-K16 specific)
+HDAC9,GO:0051153,regulation of striated muscle cell differentiation
+HDAC9,GO:1990678,histone H4-K16 deacetylation
+HDAC9,GO:0001975,response to amphetamine
+HDAC9,GO:0030182,neuron differentiation
+NAA35,GO:0017196,N-terminal peptidyl-methionine acetylation
+NAA35,GO:0031417,NatC complex
+NAA35,GO:0005737,cytoplasm
+NAA35,GO:0043066,negative regulation of apoptotic process
+NAA35,GO:0005515,protein binding
+NAA35,GO:0005844,polysome
+NAA35,GO:0006474,N-terminal protein amino acid acetylation
+NAA35,GO:0048659,smooth muscle cell proliferation
+NDOR1,GO:0055114,oxidation-reduction process
+NDOR1,GO:0016491,oxidoreductase activity
+NDOR1,GO:0010181,FMN binding
+NDOR1,GO:0003958,NADPH-hemoprotein reductase activity
+NDOR1,GO:0005737,cytoplasm
+NDOR1,GO:0005654,nucleoplasm
+NDOR1,GO:0005829,cytosol
+NDOR1,GO:0045111,intermediate filament cytoskeleton
+NDOR1,GO:0005515,protein binding
+NDOR1,GO:0048471,perinuclear region of cytoplasm
+NDOR1,GO:0050660,flavin adenine dinucleotide binding
+NDOR1,GO:0016226,iron-sulfur cluster assembly
+NDOR1,GO:0008219,cell death
+NDOR1,GO:0050661,NADP binding
+NDOR1,GO:0016651,"oxidoreductase activity, acting on NAD(P)H"
+NDOR1,GO:0016709,"oxidoreductase activity, acting on paired donors, with incorporation or reduction of molecular oxygen, NAD(P)H as one donor, and incorporation of one atom of oxygen"
+NDOR1,GO:0036245,cellular response to menadione
+PASK,GO:0005524,ATP binding
+PASK,GO:0006468,protein phosphorylation
+PASK,GO:0004672,protein kinase activity
+PASK,GO:0005634,nucleus
+PASK,GO:0005737,cytoplasm
+PASK,GO:0000166,nucleotide binding
+PASK,GO:0004674,protein serine/threonine kinase activity
+PASK,GO:0016301,kinase activity
+PASK,GO:0016740,transferase activity
+PASK,GO:0016310,phosphorylation
+PASK,GO:0005829,cytosol
+PASK,GO:0005515,protein binding
+PASK,GO:0008289,lipid binding
+PASK,GO:0045727,positive regulation of translation
+PASK,GO:0035091,phosphatidylinositol binding
+PASK,GO:0035556,intracellular signal transduction
+PASK,GO:0046777,protein autophosphorylation
+PASK,GO:0097009,energy homeostasis
+PASK,GO:0070092,regulation of glucagon secretion
+PASK,GO:0045719,negative regulation of glycogen biosynthetic process
+PASK,GO:0043576,regulation of respiratory gaseous exchange
+PPP1R7,GO:0005515,protein binding
+PPP1R7,GO:0005634,nucleus
+PPP1R7,GO:0050790,regulation of catalytic activity
+PPP1R7,GO:0043666,regulation of phosphoprotein phosphatase activity
+PPP1R7,GO:0030234,enzyme regulator activity
+PPP1R7,GO:0070062,extracellular exosome
+PPP1R7,GO:0005737,cytoplasm
+PPP1R7,GO:0019888,protein phosphatase regulator activity
+PPP1R7,GO:0035307,positive regulation of protein dephosphorylation
+PPP1R7,GO:0005694,chromosome
+RAD9A,GO:0006281,DNA repair
+RAD9A,GO:0000077,DNA damage checkpoint
+RAD9A,GO:0030896,checkpoint clamp complex
+RAD9A,GO:0005634,nucleus
+RAD9A,GO:0005654,nucleoplasm
+RAD9A,GO:0016787,hydrolase activity
+RAD9A,GO:0090305,nucleic acid phosphodiester bond hydrolysis
+RAD9A,GO:0005515,protein binding
+RAD9A,GO:0006974,cellular response to DNA damage stimulus
+RAD9A,GO:0004527,exonuclease activity
+RAD9A,GO:0004518,nuclease activity
+RAD9A,GO:0019901,protein kinase binding
+RAD9A,GO:0031573,intra-S DNA damage checkpoint
+RAD9A,GO:0017124,SH3 domain binding
+RAD9A,GO:0019899,enzyme binding
+RAD9A,GO:1901796,regulation of signal transduction by p53 class mediator
+RAD9A,GO:0006260,DNA replication
+RAD9A,GO:0042826,histone deacetylase binding
+RAD9A,GO:0071479,cellular response to ionizing radiation
+RAD9A,GO:0008408,3'-5' exonuclease activity
+RAD9A,GO:0008853,exodeoxyribonuclease III activity
+RAD9A,GO:0000076,DNA replication checkpoint
+RAD9A,GO:1902231,positive regulation of intrinsic apoptotic signaling pathway in response to DNA damage
+RAD9A,GO:0005737,cytoplasm
+SMARCA4,GO:0006355,"regulation of transcription, DNA-templated"
+SMARCA4,GO:0005634,nucleus
+SMARCA4,GO:0005524,ATP binding
+SMARCA4,GO:0005515,protein binding
+SMARCA4,GO:0016887,ATPase activity
+SMARCA4,GO:0016817,"hydrolase activity, acting on acid anhydrides"
+SMARCA4,GO:0042393,histone binding
+SMARCA4,GO:0043044,ATP-dependent chromatin remodeling
+SMARCA4,GO:0016514,SWI/SNF complex
+SMARCA4,GO:0051091,positive regulation of DNA-binding transcription factor activity
+SMARCA4,GO:0045944,positive regulation of transcription by RNA polymerase II
+SMARCA4,GO:0045893,"positive regulation of transcription, DNA-templated"
+SMARCA4,GO:0003723,RNA binding
+SMARCA4,GO:0016020,membrane
+SMARCA4,GO:0000166,nucleotide binding
+SMARCA4,GO:0016787,hydrolase activity
+SMARCA4,GO:0006325,chromatin organization
+SMARCA4,GO:0000790,nuclear chromatin
+SMARCA4,GO:0005615,extracellular space
+SMARCA4,GO:0004386,helicase activity
+SMARCA4,GO:0005730,nucleolus
+SMARCA4,GO:0007399,nervous system development
+SMARCA4,GO:0003677,DNA binding
+SMARCA4,GO:0008134,transcription factor binding
+SMARCA4,GO:0003714,transcription corepressor activity
+SMARCA4,GO:0005654,nucleoplasm
+SMARCA4,GO:0032991,protein-containing complex
+SMARCA4,GO:0047485,protein N-terminus binding
+SMARCA4,GO:0003713,transcription coactivator activity
+SMARCA4,GO:0000122,negative regulation of transcription by RNA polymerase II
+SMARCA4,GO:1904837,beta-catenin-TCF complex assembly
+SMARCA4,GO:0045892,"negative regulation of transcription, DNA-templated"
+SMARCA4,GO:0000978,RNA polymerase II proximal promoter sequence-specific DNA binding
+SMARCA4,GO:0006337,nucleosome disassembly
+SMARCA4,GO:0006338,chromatin remodeling
+SMARCA4,GO:0006357,regulation of transcription by RNA polymerase II
+SMARCA4,GO:0071564,npBAF complex
+SMARCA4,GO:0071565,
+SMARCA4,GO:0038111,interleukin-7-mediated signaling pathway
+SMARCA4,GO:0030177,positive regulation of Wnt signaling pathway
+SMARCA4,GO:1902895,positive regulation of pri-miRNA transcription by RNA polymerase II
+SMARCA4,GO:0008094,DNA-dependent ATPase activity
+SMARCA4,GO:0030308,negative regulation of cell growth
+SMARCA4,GO:0050681,androgen receptor binding
+SMARCA4,GO:0060766,negative regulation of androgen receptor signaling pathway
+SMARCA4,GO:0002039,p53 binding
+SMARCA4,GO:0031492,nucleosomal DNA binding
+SMARCA4,GO:0003407,neural retina development
+SMARCA4,GO:0070182,DNA polymerase binding
+SMARCA4,GO:0001164,RNA polymerase I CORE element sequence-specific DNA binding
+SMARCA4,GO:0001188,RNA polymerase I preinitiation complex assembly
+SMARCA4,GO:1901838,positive regulation of transcription of nucleolar large rRNA by RNA polymerase I
+SMARCA4,GO:0070577,lysine-acetylated histone binding
+SMARCA4,GO:0030957,Tat protein binding
+SMARCA4,GO:0043923,positive regulation by host of viral transcription
+SMARCA4,GO:1902661,positive regulation of glucose mediated signaling pathway
+TMEM203,GO:0005623,cell
+TMEM203,GO:0016020,membrane
+TMEM203,GO:0016021,integral component of membrane
+TMEM203,GO:0005783,endoplasmic reticulum
+TMEM203,GO:0005789,endoplasmic reticulum membrane
+TMEM203,GO:0007283,spermatogenesis
+TMEM203,GO:0005515,protein binding
+TMEM203,GO:0006874,cellular calcium ion homeostasis
+TPRN,GO:0019902,phosphatase binding
+TPRN,GO:0007605,sensory perception of sound
+TPRN,GO:0042995,cell projection
+TPRN,GO:0005515,protein binding
+TPRN,GO:0003674,molecular_function
+TPRN,GO:0032420,stereocilium
+TPRN,GO:0060088,auditory receptor cell stereocilium organization
+TPRN,GO:0120045,stereocilium maintenance
+TPRN,GO:0120044,stereocilium base
+ZFHX3,GO:0003677,DNA binding
+ZFHX3,GO:0008270,zinc ion binding
+ZFHX3,GO:0006355,"regulation of transcription, DNA-templated"
+ZFHX3,GO:0043565,sequence-specific DNA binding
+ZFHX3,GO:0003676,nucleic acid binding
+ZFHX3,GO:0005634,nucleus
+ZFHX3,GO:0005737,cytoplasm
+ZFHX3,GO:0046872,metal ion binding
+ZFHX3,GO:0003700,DNA-binding transcription factor activity
+ZFHX3,GO:0032922,circadian regulation of gene expression
+ZFHX3,GO:0045893,"positive regulation of transcription, DNA-templated"
+ZFHX3,GO:0005515,protein binding
+ZFHX3,GO:0000978,RNA polymerase II proximal promoter sequence-specific DNA binding
+ZFHX3,GO:0007517,muscle organ development
+ZFHX3,GO:0000122,negative regulation of transcription by RNA polymerase II
+ZFHX3,GO:0000981,"DNA-binding transcription factor activity, RNA polymerase II-specific"
+ZFHX3,GO:0000790,nuclear chromatin
+ZFHX3,GO:0001227,"DNA-binding transcription repressor activity, RNA polymerase II-specific"
+ZFHX3,GO:0005654,nucleoplasm
+ZFHX3,GO:0044212,transcription regulatory region DNA binding
+ZFHX3,GO:0045664,regulation of neuron differentiation
+ZFHX3,GO:0019899,enzyme binding
+ZFHX3,GO:0006366,transcription by RNA polymerase II
+ZFHX3,GO:0005667,transcription factor complex
+ZFHX3,GO:0007420,brain development
+ZFHX3,GO:0016604,nuclear body
+ZFHX3,GO:0045944,positive regulation of transcription by RNA polymerase II
+ZFHX3,GO:0045785,positive regulation of cell adhesion
+ZFHX3,GO:1904059,regulation of locomotor rhythm
+ZFHX3,GO:0071559,response to transforming growth factor beta
+ZFHX3,GO:0007050,cell cycle arrest
+ZNF365,GO:0005737,cytoplasm
+ZNF365,GO:0043231,intracellular membrane-bounded organelle
+ZNF365,GO:0046872,metal ion binding
+ZNF365,GO:0005856,cytoskeleton
+ZNF365,GO:0005515,protein binding
+ZNF365,GO:0034451,centriolar satellite
+ZNF365,GO:0005815,microtubule organizing center
+ZNF365,GO:0007399,nervous system development
+ZNF365,GO:0000723,telomere maintenance
+ZNF365,GO:0010569,regulation of double-strand break repair via homologous recombination
+ZNF365,GO:0060997,dendritic spine morphogenesis
+ZNF365,GO:0005813,centrosome
+ZNF365,GO:0010977,negative regulation of neuron projection development
+ZNF365,GO:0048714,positive regulation of oligodendrocyte differentiation
+ZNF365,GO:0140059,dendrite arborization
+ZNF365,GO:0021687,cerebellar molecular layer morphogenesis
+ZNF365,GO:0110026,regulation of DNA strand resection involved in replication fork processing

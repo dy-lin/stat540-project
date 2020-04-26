@@ -1,0 +1,11 @@
+Pathway annotations for the full input list (results size = 8)
+
+UniProt	Gene Symbol	Entrez Gene	Pathway Source	Pathway Name
+Q9UBD9	CLCF1	23529	KEGG	Cytokine-cytokine receptor interaction
+Q9UKV0	HDAC9	9734	KEGG	Alcoholism
+Q9UKV0	HDAC9	9734	KEGG	Human papillomavirus infection
+Q9UKV0	HDAC9	9734	KEGG	Viral carcinogenesis
+Q99638	RAD9A	5883	KEGG	Cellular senescence
+P51532	SMARCA4	6597	KEGG	Hepatocellular carcinoma
+P51532	SMARCA4	6597	KEGG	Thermogenesis
+Q15911	ZFHX3	463	KEGG	Signaling pathways regulating pluripotency of stem cells
